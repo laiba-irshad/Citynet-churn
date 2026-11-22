@@ -13,8 +13,8 @@ if __name__ == "__main__":
     pipe = train_model(X_train, y_train)
     proba = pipe.predict_proba(X_val)[:, 1]
     print("PR-AUC:", round(average_precision_score(y_val,proba), 3))
-    print(confusion_matrix(y_val, proba >= 0.5).tolist())
-    print(classification_report(y_val, proba >= 0.5, digits=3))
+    print(confusion_matrix(y_val, proba >= 0.3).tolist())
+    print(classification_report(y_val, proba >= 0.3, digits=3))
     top = np.argsort(-proba)[:100]                # the call team's 100 calls
     hits = y_val.to_numpy()[top].sum()
     print("top-100 churners:", hits, "| random 100 would find about", round(100 * y_val.mean()))
